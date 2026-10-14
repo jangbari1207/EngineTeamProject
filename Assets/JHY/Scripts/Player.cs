@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        AnimCompo.SetAnimation(MoveCompo);
-        MoveCompo.SetDir(InputCompo.MoveDir);
+        Vector2 moveDir = InputCompo.MoveDir;
+        AnimCompo.SetAnimation(moveDir);
+        MoveCompo.SetDir(moveDir);
     }
 }
