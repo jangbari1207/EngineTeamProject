@@ -3,10 +3,14 @@ using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
     public GameObject InventoryMenu;
-    private bool menuActivated;
     public ItemSlot[] itemSlot;
-     
+    private bool menuActivated;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Update()
     {
         if (Keyboard.current == null) return;
@@ -14,34 +18,24 @@ public class InventoryManager : MonoBehaviour
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             menuActivated = !menuActivated;
-
-            if (menuActivated)
-            {
-                Time.timeScale = 0;
-                if (InventoryMenu != null) InventoryMenu.SetActive(true);
-            }
-            else
-            {
-                Time.timeScale = 1;
-                if (InventoryMenu != null) InventoryMenu.SetActive(false);
-            }
+            Time.timeScale = menuActivated ? 0 : 1;
+            InventoryMenu.SetActive(menuActivated);
         }
     }
-
-    public void AddItem(ItemSO itemData, int quantity)
+    public int AddItem(ItemSO itemData, int quantity)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < itemSlot.Length && quantity > 0; i++)
         {
-            if (!itemSlot[i].isFull)
+            if (!itemSlot[i].isFull && (itemSlot[i].itemData == itemData || itemSlot[i].quantity == 0))
             {
-                itemSlot[i].AddItem(itemData, quantity);
-                return;
+                quantity = itemSlot[i].AddItem(itemData, quantity);
             }
         }
+        return quantity;
     }
     public void DeselectAllSlots()
     {
-        for(int i = 0;i<itemSlot.Length;i++)
+        for (int i = 0; i < itemSlot.Length; i++)
         {
             itemSlot[i].selectedShader.SetActive(false);
             itemSlot[i].thisItemSelected = false;
