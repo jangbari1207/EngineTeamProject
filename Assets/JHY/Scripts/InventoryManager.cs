@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryMenu;
     public ItemSlot[] itemSlot;
     private bool menuActivated;
+    private int currentFilter = -1;
     private void Awake()
     {
         instance = this;
@@ -31,7 +32,34 @@ public class InventoryManager : MonoBehaviour
                 quantity = itemSlot[i].AddItem(itemData, quantity);
             }
         }
+        RefreshFilter();
         return quantity;
+    }
+    public void FilterSlots(int categoryIndex)  
+    {
+        currentFilter = categoryIndex;  
+        DeselectAllSlots();            
+        itemSlot[0].ClearDescription();  
+        RefreshFilter();
+    }
+
+    public void RefreshFilter()
+    {
+        for (int i = 0; i < itemSlot.Length; i++)   
+        {
+            if (currentFilter == -1)
+            {
+                itemSlot[i].gameObject.SetActive(true);
+            }
+            else if (itemSlot[i].itemData != null && (int)itemSlot[i].itemData.category == currentFilter)
+            {
+                itemSlot[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                itemSlot[i].gameObject.SetActive(false);
+            }
+        }
     }
     public void DeselectAllSlots()
     {

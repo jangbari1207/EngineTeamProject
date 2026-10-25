@@ -107,8 +107,9 @@ public class ItemSlot : MonoBehaviour,IPointerClickHandler
         quantityText.enabled = false;
         itemImage.sprite = empty;
         ClearDescription();
+        InventoryManager.instance.RefreshFilter();
     }
-    private void ClearDescription()
+    public void ClearDescription()
     {
         ItemDescriptionNameText.text = "";
         ItemDescriptionText.text = "";

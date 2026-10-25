@@ -4,6 +4,7 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public StartToChange startToChange;
+    public ItemCategory category;
     public int amountToChangeStart;
     public Sprite sprite;
     [TextArea] public string itemDescription;
@@ -28,5 +29,11 @@ public class ItemSO : ScriptableObject
         health,
         mana,
         stamina
+    }
+    public enum ItemCategory    
+    {
+        tool,
+        recovery,
+        clue
     }
 }
