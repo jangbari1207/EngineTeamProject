@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: UFC
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: UFC
+  startToChange: 1
+  amountToChangeStart: 3
+  atrributesToChange: 0
+  amoutToChangeAttribute: 0
   sprite: {fileID: -6347997701834010969, guid: 0290e13ddcb29e641b78490500b430dd, type: 3}
   itemDescription: 'Hahahahahahahahahahahahahahah
 

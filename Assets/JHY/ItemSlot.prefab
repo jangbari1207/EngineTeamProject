@@ -91,13 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef543639709a8674b8d3964f36f5cd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSlot
-  itemName: 
+  itemData: {fileID: 0}
   quantity: 0
-  itemSprite: {fileID: 0}
   isFull: 0
-  itemDescription: 
+  empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   quantityText: {fileID: 1759728647761845242}
   itemImage: {fileID: 260411988699041763}
+  maxNumberOfItems: 9
   itemDescriptionImage: {fileID: 0}
   ItemDescriptionNameText: {fileID: 0}
   ItemDescriptionText: {fileID: 0}
@@ -380,8 +380,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
