@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6356e6bf3cf9f140b4b25335f2477a8, type: 3}
+  m_Name: UFC
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  itemName: UFC
+  startToChange: 1
+  amountToChangeStart: 3
+  atrributesToChange: 0
+  amoutToChangeAttribute: 0
+  sprite: {fileID: -6347997701834010969, guid: 0290e13ddcb29e641b78490500b430dd, type: 3}
+  itemDescription: 'Hahahahahahahahahahahahahahah
+
+'

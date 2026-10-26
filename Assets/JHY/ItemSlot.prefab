@@ -91,12 +91,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef543639709a8674b8d3964f36f5cd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSlot
-  itemName: 
+  itemData: {fileID: 0}
   quantity: 0
-  itemSprite: {fileID: 0}
   isFull: 0
+  empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   quantityText: {fileID: 1759728647761845242}
   itemImage: {fileID: 260411988699041763}
+  maxNumberOfItems: 9
+  itemDescriptionImage: {fileID: 0}
+  ItemDescriptionNameText: {fileID: 0}
+  ItemDescriptionText: {fileID: 0}
+  selectedShader: {fileID: 4231273058140256473}
+  thisItemSelected: 0
 --- !u!1 &3165898420660498682
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.14710236, y: 0.23619843}
+  m_AnchoredPosition: {x: 0.14710236, y: 0.23620605}
   m_SizeDelta: {x: 21.7626, y: 20.9959}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3081748718608891920
@@ -374,8 +380,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
