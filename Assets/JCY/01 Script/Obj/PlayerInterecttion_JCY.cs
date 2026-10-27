@@ -25,9 +25,8 @@ public class PlayerInterecttion_JCY : MonoBehaviour
         {
             if(Keyboard.current.eKey.wasPressedThisFrame)
             {
-                _fade.Fade();
                 col = null;
-                obj.Interaction(this);
+                obj.Interaction(this , _fade);
             }
         }
     }
