@@ -3,9 +3,9 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     public string itemName;
-    public StartToChange startToChange;
+    public StatToChange statToChange;
     public ItemCategory category;
-    public int amountToChangeStart;
+    public int amountToChangeStat;
     public Sprite sprite;
     [TextArea] public string itemDescription;
 
@@ -13,17 +13,17 @@ public class ItemSO : ScriptableObject
     {
         PlayerHealth player = PlayerHealth.instance;
 
-        if (startToChange == StartToChange.health)
+        if (statToChange == StatToChange.health)
         {
             if (player.currentHealth == player.maxHealth)
                 return false;
 
-            player.RestoreHealth(amountToChangeStart);
+            player.RestoreHealth(amountToChangeStat);
             return true;
         }
         return false;
     }
-    public enum StartToChange
+    public enum StatToChange
     {
         none,
         health,
