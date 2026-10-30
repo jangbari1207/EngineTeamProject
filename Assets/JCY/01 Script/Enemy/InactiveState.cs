@@ -22,22 +22,11 @@ public class InactiveState : EnemyState
         if ( _timer >= _waitTime)
         {
             if (_enemy.spawnPoints == null || _enemy.spawnPoints.Length == 0) return;
-            _enemy.transform.position = PickSpawnPoint();
+            _enemy.transform.position = _enemy.PickSpawnPoint();
             _stateMachine.ChangeState(EnemyType.Wander);
         }
     }
-    private Vector2 PickSpawnPoint()
-    {
-        var sp = _enemy.spawnPoints;
-        int start = Random.Range(0, sp.Length);
-        for (int i = 0; i < sp.Length; i++)
-        {
-            Transform p = sp[(start + i) % sp.Length];
-            if (Vector2.Distance(p.position, _enemy.player.position) >= _enemy.minSpawnDistance)
-                return p.position;
-        }
-        return sp[start].position;  
-    }
+    
     public override void Exit()
     {
         _enemy.SetVisible(true);

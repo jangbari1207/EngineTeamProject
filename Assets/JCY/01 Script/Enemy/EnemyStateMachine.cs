@@ -5,7 +5,8 @@ public enum EnemyType
     Inactive,
     Wander,
     Chase,
-    Search
+    Search,
+    DoorFollow
 }
 public class EnemyStateMachine
 {

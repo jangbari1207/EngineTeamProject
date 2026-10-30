@@ -40,6 +40,7 @@ public class WanderState : EnemyState
         if (player != null)
         {
             _enemy.targetTrm = player.transform;
+            _enemy.lastSeenPos = player.transform.position;
             _stateMachine.ChangeState(EnemyType.Chase);
             return;
         }
@@ -59,6 +60,7 @@ public class WanderState : EnemyState
             _enemy.transform.position, _dest, _enemy.wanderSpeed * Time.deltaTime);
         if (Vector3.Distance(_enemy.transform.position, _dest) <= 0.1f)
         {
+            _enemy.waitTimer = Random.Range(0.5f, 1.5f);
             currentIndex = PickNextIndex();
             SetDestination();
         }
