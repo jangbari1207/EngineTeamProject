@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class WanderState : EnemyState
 {
-    private int currentIndex=0;
+    private int currentIndex = 0;
     private Vector2 _dest;
-    public WanderState(AbstractEnemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+
+    public WanderState(AbstractEnemy enemy, EnemyStateMachine stateMachine, string animBoolName)
+        : base(enemy, stateMachine, animBoolName)
     {
     }
+
     public override void Enter()
     {
         base.Enter();
@@ -23,6 +26,43 @@ public class WanderState : EnemyState
         }
         SetDestination();
     }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+
+        Collider2D player = _enemy.Detect();
+        if (player != null)
+        {
+            _enemy.targetTrm = player.transform;
+            _enemy.lastSeenPos = player.transform.position;
+            _stateMachine.ChangeState(EnemyType.Chase);
+            return;
+        }
+
+        _enemy._noDetectTimer += Time.deltaTime;
+        if (_enemy._noDetectTimer >= 20f)
+        {
+            _stateMachine.ChangeState(EnemyType.Inactive);
+            return;
+        }
+
+        if (_enemy.wanderPoints == null || _enemy.wanderPoints.Length == 0) return;
+
+        if (_enemy.waitTimer > 0f)
+        {
+            _enemy.waitTimer -= Time.deltaTime;
+            if (_enemy.waitTimer <= 0f) SetDestination();    
+            return;
+        }
+
+        if (_enemy.HasArrived())
+        {
+            _enemy.StopMove();
+            _enemy.waitTimer = Random.Range(0.5f, 1.5f);
+            currentIndex = PickNextIndex();                 
+        }
+    }
     private int PickNextIndex()
     {
         int count = _enemy.wanderPoints.Length;
@@ -33,42 +73,11 @@ public class WanderState : EnemyState
         while (next == currentIndex);
         return next;
     }
-    public override void UpdateState()
-    {
-        base.UpdateState();
-        Collider2D player = _enemy.Detect();
-        if (player != null)
-        {
-            _enemy.targetTrm = player.transform;
-            _enemy.lastSeenPos = player.transform.position;
-            _stateMachine.ChangeState(EnemyType.Chase);
-            return;
-        }
-        _enemy._noDetectTimer += Time.deltaTime;
-        if (_enemy._noDetectTimer >= 20f)
-        {
-            _stateMachine.ChangeState(EnemyType.Inactive);
-            return;
-        }
-        if (_enemy.wanderPoints == null || _enemy.wanderPoints.Length == 0) return;
-        if (_enemy.waitTimer > 0f)
-        {
-            _enemy.waitTimer -= Time.deltaTime;
-            return;
-        }
-        _enemy.transform.position = Vector3.MoveTowards(
-            _enemy.transform.position, _dest, _enemy.wanderSpeed * Time.deltaTime);
-        if (Vector3.Distance(_enemy.transform.position, _dest) <= 0.1f)
-        {
-            _enemy.waitTimer = Random.Range(0.5f, 1.5f);
-            currentIndex = PickNextIndex();
-            SetDestination();
-        }
-    }
     private void SetDestination()
     {
         _dest = (Vector2)_enemy.wanderPoints[currentIndex].position
                 + Random.insideUnitCircle * _enemy.wanderJitter;
+        _enemy.MoveTo(_dest, _enemy.wanderSpeed);
     }
 
 }

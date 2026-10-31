@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class SearchState : EnemyState
 {
-    public SearchState(AbstractEnemy enemy, EnemyStateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    private float _timer;        
+    private float _waitTimer;    
+
+    public SearchState(AbstractEnemy enemy, EnemyStateMachine stateMachine, string animBoolName)
+        : base(enemy, stateMachine, animBoolName)
     {
     }
-    private float _timer;        // 남은 수색 시간
-    private Vector2 _dest;       // 지금 향하는 좌표
-    private float _waitTimer;    // 도착 후 잠깐 멈춤
 
     public override void Enter()
     {
@@ -16,7 +17,7 @@ public class SearchState : EnemyState
 
         _timer = _enemy.searchDuration;
         _waitTimer = 0f;
-        _dest = _enemy.lastSeenPos;   
+        _enemy.MoveTo(_enemy.lastSeenPos, _enemy.searchSpeed);   
     }
 
     public override void UpdateState()
@@ -42,16 +43,18 @@ public class SearchState : EnemyState
         if (_waitTimer > 0f)
         {
             _waitTimer -= Time.deltaTime;
+            if (_waitTimer <= 0f)
+            {
+                Vector2 next = _enemy.lastSeenPos + Random.insideUnitCircle * _enemy.searchRadius;
+                _enemy.MoveTo(next, _enemy.searchSpeed);
+            }
             return;
         }
 
-        _enemy.transform.position = Vector2.MoveTowards(
-            _enemy.transform.position, _dest, _enemy.searchSpeed * Time.deltaTime);
-
-        if (Vector2.Distance(_enemy.transform.position, _dest) <= 0.1f)
+        if (_enemy.HasArrived())
         {
+            _enemy.StopMove();
             _waitTimer = Random.Range(0.3f, 1f);
-            _dest = _enemy.lastSeenPos + Random.insideUnitCircle * _enemy.searchRadius;
         }
     }
 

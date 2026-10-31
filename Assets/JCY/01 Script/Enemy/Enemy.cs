@@ -10,7 +10,6 @@ public class Enemy : AbstractEnemy
     {
         base.Awake();
 
-
         stateMachine.AddState(EnemyType.Inactive, new InactiveState(this, stateMachine, "Inactive"));
         stateMachine.AddState(EnemyType.Wander, new WanderState(this, stateMachine, "Wander"));
         stateMachine.AddState(EnemyType.Chase, new ChaseState(this, stateMachine, "Chase"));
@@ -28,6 +27,7 @@ public class Enemy : AbstractEnemy
         foreach (var item in items)
             item.itemTrigger += OnItemPicked;
     }
+
     private void OnDestroy()
     {
         DoorTrigger.PlayerPassed -= OnPlayerPassedDoor;
@@ -36,10 +36,11 @@ public class Enemy : AbstractEnemy
         foreach (var item in items)
             if (item != null) item.itemTrigger -= OnItemPicked;
     }
+
     private void OnPlayerPassedDoor(DoorTrigger door, Transform playerTrm)
     {
         var cur = stateMachine.CurrentState;
-        if (cur is DoorFollowState) return;     
+        if (cur is DoorFollowState) return;
 
         if (cur is ChaseState)
         {
@@ -48,6 +49,7 @@ public class Enemy : AbstractEnemy
             stateMachine.ChangeState(EnemyType.DoorFollow);
             return;
         }
+
         if (door.isDangerDoor)
         {
             pendingDoor = door;
@@ -63,7 +65,7 @@ public class Enemy : AbstractEnemy
         if (cur is InactiveState)
         {
             if (spawnPoints == null || spawnPoints.Length == 0) return;
-            transform.position = PickSpawnPoint();
+            Teleport(PickSpawnPoint());
         }
 
         lastSeenPos = itemPos;
@@ -73,7 +75,6 @@ public class Enemy : AbstractEnemy
     {
         stateMachine.CurrentState.UpdateState();
     }
-
     public override void AniEndTrigger()
     {
         base.AniEndTrigger();

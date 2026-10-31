@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class DoorFollowState : EnemyState
 {
-    private const float ChaseFollowDelay = 1f;  
-    private const float warningDelayMin = 3f;     
-    private const float warningDelayMax = 5f;
-
     private float _timer;
     private float _waitTime;
 
@@ -24,8 +20,10 @@ public class DoorFollowState : EnemyState
         if (door == null) _waitTime = 0f;
         else _waitTime = isChaseFollow ? door.chaseFollowDelay : door.GetDangerDelay();
 
+        _enemy.StopMove();
         if (!isChaseFollow) _enemy.SetVisible(false);
     }
+
     public override void UpdateState()
     {
         base.UpdateState();
@@ -41,7 +39,7 @@ public class DoorFollowState : EnemyState
         if (_timer < _waitTime) return;
 
         var appear = door.enemyAppearPoint != null ? door.enemyAppearPoint : door.transform;
-        _enemy.transform.position = appear.position;
+        _enemy.Teleport(appear.position);
         _enemy.pendingDoor = null;
 
         if (_enemy.doorPlayer != null)
@@ -57,6 +55,7 @@ public class DoorFollowState : EnemyState
             _stateMachine.ChangeState(EnemyType.Search);
         }
     }
+
     public override void Exit()
     {
         _enemy.SetVisible(true);
