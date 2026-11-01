@@ -10,25 +10,12 @@ public class EnemyMnager_JCY : MonoBehaviour
     [SerializeField] private float enemyMoveTime;
     [SerializeField] private float enemyDestTime;
     
-    public static EnemyMnager_JCY Instance { get; private set; }
     public bool _isChase;
     public Action OnChase;
     public Action OffChase;
 
     private GameObject currentEnemy;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
 
     private void Start()
     {
@@ -62,7 +49,10 @@ public class EnemyMnager_JCY : MonoBehaviour
     private IEnumerator Enemymove(Transform transform)
     {
         yield return new WaitForSeconds(enemyMoveTime);
-        currentEnemy.transform.position = transform.position;
+        if (currentEnemy != null)
+        { 
+            currentEnemy.transform.position = transform.position;
+        }
     }
     
     private IEnumerator EnemyDestTimer()

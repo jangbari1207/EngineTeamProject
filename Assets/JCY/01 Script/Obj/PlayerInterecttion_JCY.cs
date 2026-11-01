@@ -21,7 +21,8 @@ public class PlayerInterecttion_JCY : MonoBehaviour
         {
             return;
         }
-        if (col.TryGetComponent(out Object_JCY obj) && col)
+        
+        if (col.TryGetComponent(out IObject_JCY obj) && col != null)
         {
             if(Keyboard.current.eKey.wasPressedThisFrame)
             {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door_JCY : MonoBehaviour , Object_JCY
+public class Door_JCY : MonoBehaviour , IObject_JCY
 {
     [SerializeField] private Door_JCY _endDoor;
     public Transform _doorTfm;
@@ -21,14 +21,16 @@ public class Door_JCY : MonoBehaviour , Object_JCY
         }
         
         player.transform.position = _endDoor._doorTfm.position;
-        _time = Time.time + 3f;
-        Debug.Log("쿨타임:" + _time);
-        Debug.Log("현 시간:" + Time.time);
         //문 열리는 사운드 출력
         //이동
-        if (EnemyMnager_JCY.Instance._isChase)
+        if (GameManager.Instance._enemyManager._isChase)
         {
-            EnemyMnager_JCY.Instance.PlayerMove(_endDoor._doorTfm);
+            _time = Time.time + 3f;
+            GameManager.Instance._enemyManager.PlayerMove(_endDoor._doorTfm);
+        }
+        else
+        {
+             _time = Time.time + 0.5f;
         }
     }
 }
