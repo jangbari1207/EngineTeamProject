@@ -47,5 +47,6 @@ public class ChaseState : EnemyState
     {
         base.Exit();
         _enemy.targetTrm = null;
+        _enemy.lastChaseTime = Time.time;
     }
 }

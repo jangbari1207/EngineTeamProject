@@ -5,7 +5,13 @@ public class Enemy : AbstractEnemy
 {
     public EnemyStateMachine stateMachine = new EnemyStateMachine();
     [SerializeField] private FollowTrigger[] items;
+    [Header("문 추적 거리")]
+    [SerializeField] private float doorFollowRange = 17f;   
 
+    private bool IsNearDoor(DoorTrigger door)
+    {
+        return Vector2.Distance(transform.position, door.transform.position) <= doorFollowRange;
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -40,10 +46,30 @@ public class Enemy : AbstractEnemy
     private void OnPlayerPassedDoor(DoorTrigger door, Transform playerTrm)
     {
         var cur = stateMachine.CurrentState;
-        if (cur is DoorFollowState) return;
-
-        if (cur is ChaseState)
+        bool near = IsNearDoor(door);
+        if (cur is DoorFollowState follow)
         {
+            if (!near) return;
+            if (doorPlayer != null)           
+            {
+                pendingDoor = door;
+                doorPlayer = playerTrm;
+                follow.Restart();
+            }
+            else if (door.isDangerDoor)         
+            {
+                pendingDoor = door;
+                follow.Restart();
+            }
+            return;
+        }
+
+        bool chasing = cur is ChaseState;
+        bool justLost = cur is SearchState && Time.time - lastChaseTime <= doorFollowWindow;
+
+        if (chasing || justLost)
+        {
+            if (!near) return;
             pendingDoor = door;
             doorPlayer = playerTrm;
             stateMachine.ChangeState(EnemyType.DoorFollow);

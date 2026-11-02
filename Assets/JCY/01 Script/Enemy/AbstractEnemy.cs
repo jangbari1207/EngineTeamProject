@@ -19,6 +19,8 @@ public abstract class AbstractEnemy : MonoBehaviour
     public Transform targetTrm;
     public float loseTime = 1.5f;
     public float _lostTimer;
+    public float lastChaseTime = -999f;    
+    public float doorFollowWindow = 5f;
     public float _noDetectTimer;
     public float catchDistance = 0.5f;
     public float repathInterval = 0.3f;
@@ -36,9 +38,11 @@ public abstract class AbstractEnemy : MonoBehaviour
     [Header("문 추적")]
     public DoorTrigger pendingDoor;
     public Transform doorPlayer;
+    private Collider2D _colliders;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        _colliders = GetComponent<Collider2D>();
         agent.updateRotation = false;  
         agent.updateUpAxis = false;    
         AnimCompo = GetComponentInChildren<Animator>();
@@ -112,6 +116,7 @@ public abstract class AbstractEnemy : MonoBehaviour
     public void SetVisible(bool on)
     {
         visual.SetActive(on);
+        _colliders.enabled = on;
     }
     public virtual void AniEndTrigger()
     {

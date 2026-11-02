@@ -23,7 +23,18 @@ public class DoorFollowState : EnemyState
         _enemy.StopMove();
         if (!isChaseFollow) _enemy.SetVisible(false);
     }
+    public void Restart()
+    {
+        _timer = 0f;
+        var door = _enemy.pendingDoor;
+        if (door == null)
+        {
+            _waitTime = 0f; return;
+        }
 
+        bool isChaseFollow = _enemy.doorPlayer != null;
+        _waitTime = isChaseFollow ? door.chaseFollowDelay : door.GetDangerDelay();
+    }
     public override void UpdateState()
     {
         base.UpdateState();
