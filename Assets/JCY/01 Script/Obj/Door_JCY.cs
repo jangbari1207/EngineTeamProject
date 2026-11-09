@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Door_JCY : MonoBehaviour , IObject_JCY
 {
     [SerializeField] private Door_JCY _endDoor;
+    [SerializeField] private CinemachineConfiner2D _camera;
+    public BoxCollider2D _collider2D;
     public Transform _doorTfm;
     public static float _time;
 
@@ -14,11 +17,18 @@ public class Door_JCY : MonoBehaviour , IObject_JCY
         {
             return;
         }
+        
+        
+        if (_endDoor._collider2D != null && _camera != null)
+        {
+            _camera.BoundingShape2D = _endDoor._collider2D;
+        }
 
         if (fadePanelJcy != null)
         {
             fadePanelJcy.Fade();
         }
+
         
         player.transform.position = _endDoor._doorTfm.position;
         //문 열리는 사운드 출력

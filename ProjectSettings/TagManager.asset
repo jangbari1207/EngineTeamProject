@@ -41,6 +41,9 @@ TagManager:
   - name: BeckGround
     uniqueID: 1564845855
     locked: 0
+  - name: Wall
+    uniqueID: 519656649
+    locked: 0
   - name: Object
     uniqueID: 3734023731
     locked: 0
