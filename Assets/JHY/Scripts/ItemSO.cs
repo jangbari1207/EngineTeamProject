@@ -30,7 +30,7 @@ public class ItemSO : ScriptableObject
         mana,
         stamina
     }
-    public enum ItemCategory    
+    public enum ItemCategory    //분류 용도
     {
         tool,
         recovery,

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class EnemyState
 {
-    protected AbstractEnemy _enemy;
+    protected Enemy _enemy;
     protected EnemyStateMachine _stateMachine;
     protected int _animBoolHash;
     protected bool _animationEndTrigger;
-    public EnemyState(AbstractEnemy enemy,EnemyStateMachine stateMachine, string animBoolName)
+    public EnemyState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
     {
         _enemy = enemy;
         _stateMachine = stateMachine;
