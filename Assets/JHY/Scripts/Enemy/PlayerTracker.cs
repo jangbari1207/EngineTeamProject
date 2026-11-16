@@ -7,7 +7,7 @@ public class PlayerTracker : MonoBehaviour
     public Transform player;
     public Tilemap grid;                       // 벽 타일맵 (칸 계산용)
 
-    public Vector2 Position { get { return player.position; } }
+    public Vector2 PPosition { get { return player.position; } }
     public Vector3Int Facing { get; private set; } = Vector3Int.down;
     public int Steps { get; private set; }
 
@@ -20,9 +20,9 @@ public class PlayerTracker : MonoBehaviour
     private void Start()
     {
         _lastCell = grid.WorldToCell(player.position);
-        _lastRoomPos = Position;
-        _roomEntryPos = Position;
-        _currentRoom = Room.Find(Position);
+        _lastRoomPos = PPosition;
+        _roomEntryPos = PPosition;
+        _currentRoom = Room.Find(PPosition);
     }
 
     private void Update()
@@ -46,20 +46,20 @@ public class PlayerTracker : MonoBehaviour
     }
     private void CheckRoomChange()
     {
-        Room room = Room.Find(Position);
+        Room room = Room.Find(PPosition);
         if (room == null) return;
 
         if (room == _currentRoom)
         {
-            _lastRoomPos = Position;
+            _lastRoomPos = PPosition;
             return;
         }
 
         Vector2 exitPos = _lastRoomPos;
         Vector2 oldEntryPos = _roomEntryPos;
         _currentRoom = room;
-        _lastRoomPos = Position;
-        _roomEntryPos = Position;
+        _lastRoomPos = PPosition;
+        _roomEntryPos = PPosition;
 
         if (RoomChanged != null) RoomChanged(room, exitPos, oldEntryPos);
     }

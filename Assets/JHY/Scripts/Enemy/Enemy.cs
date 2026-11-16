@@ -59,7 +59,7 @@ public class Enemy : AbstractEnemy
     // ChaseState가 매 프레임 호출
     public void ChaseTarget()
     {
-        MoveTo(tracker.Position, chaseSpeed, tracker.Facing);
+        MoveTo(tracker.PPosition, chaseSpeed, tracker.Facing);
     }
 
     public override void AniEndTrigger()
