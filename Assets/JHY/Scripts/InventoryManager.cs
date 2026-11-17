@@ -35,6 +35,15 @@ public class InventoryManager : MonoBehaviour
         RefreshFilter();
         return quantity;
     }
+    public bool HasItem(ItemSO item)
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].itemData == item && itemSlot[i].quantity > 0)
+                return true;
+        }
+        return false;
+    }
     public void FilterSlots(int categoryIndex)  
     {
         currentFilter = categoryIndex;  

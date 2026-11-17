@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6356e6bf3cf9f140b4b25335f2477a8, type: 3}
-  m_Name: BlackCombat
+  m_Name: Key1
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: BlackCombat
-  startToChange: 1
-  category: 1
-  amountToChangeStart: 2
-  sprite: {fileID: -8405474575838441102, guid: 6701671779e40114bb686f3477d00f3d, type: 3}
-  itemDescription: 'Korea
-
-'
+  itemName: Key1
+  statToChange: 0
+  category: 0
+  amountToChangeStat: 0
+  sprite: {fileID: 3119114190357680807, guid: 4ad955c74c8a73044839ce2c8c529935, type: 3}
+  itemDescription: "Using by open \uACC4\uB2E8\n"

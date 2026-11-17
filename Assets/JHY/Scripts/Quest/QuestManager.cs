@@ -1,0 +1,63 @@
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class QuestManager : MonoBehaviour
+{
+    public static QuestManager instance;
+    public List<QuestStepData> steps;
+    public int currentStep = 0;
+
+    public event Action OnQuestChanged;
+
+    private Dictionary<string, GameObject> targets = new Dictionary<string, GameObject>();
+
+    private void Awake()
+    {
+        instance = this;
+        QuestTarget[] found = FindObjectsByType<QuestTarget>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (QuestTarget t in found)
+        {
+            targets[t.id] = t.gameObject;
+        }
+    }
+    private void Start()
+    {
+        StartStep();
+    }
+
+    private void StartStep()
+    {
+        if (currentStep >= steps.Count) return;
+
+        QuestStepData step = steps[currentStep];
+        Debug.Log(step.npcDialogue);
+        SetActiveByIds(step.turnOnIds, true);
+        SetActiveByIds(step.turnOffIds, false);
+
+        OnQuestChanged?.Invoke();
+    }
+    private void SetActiveByIds(string[] ids, bool active)
+    {
+        foreach(string id in ids)
+        {
+            if (targets.ContainsKey(id))
+                targets[id].SetActive(active);
+            else
+                Debug.Log("Id를 찾을 수 없음: " + id);
+        }
+    }
+
+    public void CompleteStep()
+    {
+        Debug.Log($"Quest{currentStep} 완료!");
+        currentStep++;
+        StartStep();
+    }
+    public string GetDialogue()
+    {
+        if (currentStep >= steps.Count) return "더 이상 할 일이 없다.";
+        return steps[currentStep].npcDialogue;
+    }
+}
