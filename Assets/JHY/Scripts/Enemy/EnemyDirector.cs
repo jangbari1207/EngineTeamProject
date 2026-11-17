@@ -80,7 +80,7 @@ public class EnemyDirector : MonoBehaviour
         IsChasing = true;
         _caught = false;
         timer.Begin(room.chaseTime);
-        enemy.Appear(room.GetRandomPosition(tracker.PPosition), room.spawnDelay);
+        enemy.Appear(room.GetRandomPosition(), room.spawnDelay);
     }
 
     // 추적 중 플레이어가 방을 옮김 → 적이 사라졌다가 지연 후 새 방에 나타남
