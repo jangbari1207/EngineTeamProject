@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e1bdf82ebeffb4c813d45269e6e59b, type: 3}
   m_Name: Quest1
   m_EditorClassIdentifier: Assembly-CSharp::QuestStepData
-  questName: Quest1
-  requiredItem: {fileID: 11400000, guid: afa3cd136b0e3c845b347e70663caf86, type: 2}
+  questCode: 1.05
   npcDialogue: "\uACC4\uB2E8 \uC5F4\uC1E0\uB97C \uC5BB\uC790!"
+  requiredItem: {fileID: 11400000, guid: afa3cd136b0e3c845b347e70663caf86, type: 2}
   turnOnIds:
   - Key1
   turnOffIds: []
