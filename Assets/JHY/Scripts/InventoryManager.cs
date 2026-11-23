@@ -44,6 +44,14 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
+    public void UseItem(ItemSO item)
+    {
+        for(int i = 0;i<itemSlot.Length;i++)
+        {
+            if (itemSlot[i].itemData == item && itemSlot[i].quantity > 0)
+                itemSlot[i].RemoveOne();
+        }
+    }
     public void FilterSlots(int categoryIndex)  
     {
         currentFilter = categoryIndex;  

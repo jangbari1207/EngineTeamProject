@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 115990375}
   - component: {fileID: 115990378}
   m_Layer: 0
-  m_Name: "\uACC4\uB2E8"
+  m_Name: "\uC7A0\uAE34 \uBB38"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LockedFloor
   requiredKey: {fileID: 11400000, guid: afa3cd136b0e3c845b347e70663caf86, type: 2}
+  questCode: 1.06
 --- !u!212 &115990376
 SpriteRenderer:
   serializedVersion: 2
@@ -1064,8 +1065,8 @@ Transform:
   m_GameObject: {fileID: 115990374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.9899, y: 62.8011, z: 0}
-  m_LocalScale: {x: 4.0595593, y: 2.6474717, z: 1}
+  m_LocalPosition: {x: 35.6116, y: 57.94, z: 0}
+  m_LocalScale: {x: 5.1828394, y: 2.6474717, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 595477271}
@@ -1360,6 +1361,7 @@ GameObject:
   - component: {fileID: 176234311}
   - component: {fileID: 176234310}
   - component: {fileID: 176234309}
+  - component: {fileID: 176234316}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Player
@@ -1377,8 +1379,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15, y: 70.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.41, y: 1.41, z: 1.41}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 179447337}
   m_Father: {fileID: 0}
@@ -1531,6 +1533,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &176234316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176234307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bce84084fae59349bc2d53bc91f740c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  currentHealth: 0
+  maxHealth: 20
+  health: {fileID: 9232012}
 --- !u!1 &179447336
 GameObject:
   m_ObjectHideFlags: 0
@@ -174518,8 +174535,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1485373025
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3119114190357680807, guid: 4ad955c74c8a73044839ce2c8c529935, type: 3}
@@ -177914,7 +177931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door_JCY
   _endDoor: {fileID: 938575066}
   _camera: {fileID: 1935838479}
-  _collider2D: {fileID: 0}
+  _collider2D: {fileID: 1440889104}
   _doorTfm: {fileID: 1325661800}
 --- !u!61 &1504443703
 BoxCollider2D:
@@ -178052,6 +178069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestManager
   steps:
   - {fileID: 11400000, guid: bad5c959ed292984d8934a2268580a76, type: 2}
+  - {fileID: 11400000, guid: 021603db4d46c5e41b28c8cdcf6f802b, type: 2}
   currentStep: 0
 --- !u!4 &1510710716
 Transform:

@@ -26,7 +26,15 @@ public class QuestManager : MonoBehaviour
     {
         StartStep();
     }
+    private void Update()
+    {
+        if (currentStep >= steps.Count) return;
+        if (InventoryManager.instance == null) return;
 
+        ItemSO need = steps[currentStep].requiredItem;
+        if (need != null && InventoryManager.instance.HasItem(need))
+            CompleteStep();
+    }
     private void StartStep()
     {
         if (currentStep >= steps.Count) return;
@@ -48,7 +56,14 @@ public class QuestManager : MonoBehaviour
                 Debug.Log("Id를 찾을 수 없음: " + id);
         }
     }
+    public void TryComplete(string questCode)
+    {
+        if (questCode == null || questCode == "") return;
+        if (currentStep >= steps.Count) return;
 
+        if (steps[currentStep].questCode == questCode)
+            CompleteStep();
+    }
     public void CompleteStep()
     {
         Debug.Log($"Quest{currentStep} 완료!");
