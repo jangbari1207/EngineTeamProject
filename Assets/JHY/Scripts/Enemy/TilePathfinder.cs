@@ -69,7 +69,7 @@ public class TilePathfinder
         {
             Node cur = open[0];
             foreach (Node n in open)
-                if (n.F < cur.F) cur = n;
+                if (n.F < cur.F || (n.F == cur.F && n.h < cur.h)) cur = n;
 
             open.Remove(cur);
             openLookup.Remove(cur.pos);

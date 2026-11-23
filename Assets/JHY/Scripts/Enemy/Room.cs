@@ -35,21 +35,13 @@ public class Room : MonoBehaviour
         }
         return null;
     }
-    public Vector2 GetRandomPosition(Vector2 entryPos)
+    public Vector2 GetRandomPosition()
     {
-        if (appearPoints == null || appearPoints.Length < 2)
+        if (appearPoints == null || appearPoints.Length == 0)
             return transform.position;
 
-        Transform entry = FindPoint(entryPos, true);   // 들어온 문
-
-        List<Transform> candidates = new List<Transform>();
-        foreach (Transform p in appearPoints)
-        {
-            if (p != null && p != entry) candidates.Add(p);
-        }
-
-        if (candidates.Count == 0) return transform.position;
-        return candidates[Random.Range(0, candidates.Count)].position;
+        Transform p = appearPoints[Random.Range(0, appearPoints.Length)];
+        return p != null ? (Vector2)p.position : (Vector2)transform.position;
     }
     private Transform FindPoint(Vector2 playerPos, bool nearest)
     {

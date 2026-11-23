@@ -45,7 +45,7 @@ public class EnemyDirector : MonoBehaviour
     {
         if (_caught || !enemy.IsChasing) return;
 
-        if (Vector2.Distance(enemy.transform.position, tracker.Position) < catchDistance)
+        if (Vector2.Distance(enemy.transform.position, tracker.PPosition) < catchDistance)
         {
             _caught = true;
             Debug.Log("잡힘!");
@@ -80,7 +80,7 @@ public class EnemyDirector : MonoBehaviour
         IsChasing = true;
         _caught = false;
         timer.Begin(room.chaseTime);
-        enemy.Appear(room.GetRandomPosition(tracker.Position), room.spawnDelay);
+        enemy.Appear(room.GetRandomPosition(), room.spawnDelay);
     }
 
     // 추적 중 플레이어가 방을 옮김 → 적이 사라졌다가 지연 후 새 방에 나타남
@@ -90,7 +90,7 @@ public class EnemyDirector : MonoBehaviour
         Vector2 from = waiting ? oldEntryPos : (Vector2)enemy.transform.position;
         int cost = enemy.GetPathCost(from, exitPos);
         float delay = Mathf.Max(cost, 1) / enemy.chaseSpeed;
-        Vector2 appearPos = room.GetAppearPosition(tracker.Position);
+        Vector2 appearPos = room.GetAppearPosition(tracker.PPosition);
 
         Debug.Log("따라오기 지연: 칸=" + cost + " / 시간=" + delay + " / 누적=" + waiting);
         enemy.Appear(appearPos, delay, waiting);
