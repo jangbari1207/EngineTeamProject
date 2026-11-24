@@ -4,12 +4,10 @@ public enum EnemyType
 {
     Inactive,
     Chase,
-    Disguised,      
-    HideChase,
-    Return,
     Patrol,       
     Charge,
-    Search
+    Search,
+    Attack
 }
 public class EnemyStateMachine
 {

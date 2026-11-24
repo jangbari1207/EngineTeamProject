@@ -38,6 +38,12 @@ public class FrenzyEnemy : Enemy
         stateMachine.ChangeState(EnemyType.Patrol);
     }
 
+    // 나타난 자리를 대기 위치로 삼는다 (patrolPoints가 비어 있을 때 돌아오는 곳)
+    public void SetHome(Vector2 pos)
+    {
+        _home = pos;
+    }
+
     public bool SeesPlayer()
     {
         return !tracker.IsHidden && CanSee(tracker.PPosition, sightRange);

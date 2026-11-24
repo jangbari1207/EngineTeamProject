@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 490228935098870452}
   - component: {fileID: 3192650056205129782}
-  - component: {fileID: 7475540506966366258}
   - component: {fileID: 4414145765842464985}
   - component: {fileID: 4211173041332824958}
   m_Layer: 15
@@ -52,28 +51,6 @@ MonoBehaviour:
   wallMap: {fileID: 0}
   chaseSpeed: 4
   tracker: {fileID: 0}
---- !u!95 &7475540506966366258
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421892625016681837}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 06062db658668504493292f17341b75c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &4414145765842464985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -157,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3713954998049591472}
   - component: {fileID: 1553245445066999177}
+  - component: {fileID: 6152098590826648182}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -238,3 +216,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &6152098590826648182
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167631890356493380}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06062db658668504493292f17341b75c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
