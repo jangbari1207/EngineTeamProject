@@ -3,7 +3,11 @@ using UnityEngine;
 public enum EnemyType
 {
     Inactive,
-    Chase
+    Chase,
+    Patrol,       
+    Charge,
+    Search,
+    Attack
 }
 public class EnemyStateMachine
 {

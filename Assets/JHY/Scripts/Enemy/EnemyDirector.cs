@@ -13,6 +13,10 @@ public class EnemyDirector : MonoBehaviour
     public float catchDistance = 0.8f;
 
     public static event Action PlayerCaught;
+    public static void NotifyCaught()
+    {
+        if (PlayerCaught != null) PlayerCaught();
+    }
     public bool IsChasing { get; private set; }
     private bool _caught;
 
@@ -108,6 +112,11 @@ public class EnemyDirector : MonoBehaviour
     // 옷장 등에 숨었을 때 호출
     public void OnPlayerHide()
     {
+        tracker.IsHidden = true;
         if (IsChasing) EndChase();
+    }
+    public void OnPlayerUnhide()
+    {
+        tracker.IsHidden = false;
     }
 }
