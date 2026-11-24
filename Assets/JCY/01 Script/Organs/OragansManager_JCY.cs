@@ -5,13 +5,6 @@ using UnityEngine.InputSystem;
 public class OragansManager_JCY : MonoBehaviour
 {
     public Hart_JCY _hart;
-    public Eye_JCY _eye;
-    public Ear_JCY _ear;
-    public Leg_JCY _leg;
-
-    private void Start()
-    {
-    }
 
     private void Update()
     {

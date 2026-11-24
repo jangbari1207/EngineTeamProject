@@ -293,7 +293,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1252646707}
   _doorTfm: {fileID: 705457333}
-  _isKey: 0
 --- !u!61 &15827410
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -577,7 +576,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1920722887}
   _doorTfm: {fileID: 751633489}
-  _isKey: 0
 --- !u!61 &58389829
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1888,7 +1886,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1252646707}
   _doorTfm: {fileID: 1174373938}
-  _isKey: 0
 --- !u!4 &354929655
 Transform:
   m_ObjectHideFlags: 0
@@ -3833,7 +3830,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 810788310}
   _doorTfm: {fileID: 580539354}
-  _isKey: 0
 --- !u!61 &982853985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4454,7 +4450,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1182470011}
   _doorTfm: {fileID: 1000657520}
-  _isKey: 0
 --- !u!61 &1186992990
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -39506,7 +39501,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 810788310}
   _doorTfm: {fileID: 1666197358}
-  _isKey: 0
 --- !u!61 &1809214934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -39628,7 +39622,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1161988624}
   _doorTfm: {fileID: 1390237468}
-  _isKey: 0
 --- !u!1 &1842001533
 GameObject:
   m_ObjectHideFlags: 0
@@ -40628,7 +40621,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1042872259}
   _doorTfm: {fileID: 2139339854}
-  _isKey: 0
 --- !u!61 &2057544246
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -40785,7 +40777,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 330442685}
   _doorTfm: {fileID: 105065140}
-  _isKey: 0
 --- !u!61 &2075526060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41048,7 +41039,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 810788310}
   _doorTfm: {fileID: 579432735}
-  _isKey: 0
 --- !u!61 &2091040818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41170,7 +41160,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1161988624}
   _doorTfm: {fileID: 325386550}
-  _isKey: 0
 --- !u!4 &2097637776
 Transform:
   m_ObjectHideFlags: 0
@@ -41343,7 +41332,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 330442685}
   _doorTfm: {fileID: 2078689050}
-  _isKey: 0
 --- !u!61 &2110566879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176187,7 +176175,7 @@ Transform:
   m_GameObject: {fileID: 6483845954833046199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.03, y: 0.58, z: 0}
+  m_LocalPosition: {x: -2.58456, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -176209,7 +176197,6 @@ MonoBehaviour:
   _camera: {fileID: 844607028}
   _collider2D: {fileID: 1611966664}
   _doorTfm: {fileID: 1774294372}
-  _isKey: 0
 --- !u!4 &1499361680449597126
 Transform:
   m_ObjectHideFlags: 0
@@ -176448,8 +176435,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -560943565
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 15fb34ae96996214296a835e8f15b2a3, type: 3}
