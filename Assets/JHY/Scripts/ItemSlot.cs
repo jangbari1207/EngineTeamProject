@@ -64,7 +64,7 @@ public class ItemSlot : MonoBehaviour,IPointerClickHandler
 
         itemToDrop.AddComponent<BoxCollider2D>().isTrigger = true;
         itemToDrop.transform.position = PlayerHealth.instance.transform.position;
-        itemToDrop.transform.localScale = new Vector3(0.1282434f, 0.1059094f, 0.5054f);
+        //itemToDrop.transform.localScale = new Vector3(0.1282434f, 0.1059094f, 0.5054f);
 
         RemoveOne();
     }
@@ -91,7 +91,7 @@ public class ItemSlot : MonoBehaviour,IPointerClickHandler
         ItemDescriptionText.text = itemData.itemDescription;
         itemDescriptionImage.sprite = itemData.sprite;
     }
-    private void RemoveOne()
+    public void RemoveOne()
     {
         quantity--;
         isFull = false;

@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class InactiveState : EnemyState
 {
-    public InactiveState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName)
-        : base(enemy, stateMachine, animBoolName)
+    public InactiveState(Enemy enemy, EnemyStateMachine stateMachine, string animBoolName): base(enemy, stateMachine, animBoolName)
     {
     }
     public override void Enter()

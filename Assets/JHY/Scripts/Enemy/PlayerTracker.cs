@@ -10,7 +10,7 @@ public class PlayerTracker : MonoBehaviour
     public Vector2 PPosition { get { return player.position; } }
     public Vector3Int Facing { get; private set; } = Vector3Int.down;
     public int Steps { get; private set; }
-
+    public bool IsHidden { get; set; }
     public event Action<Room, Vector2, Vector2> RoomChanged;
     private Vector3Int _lastCell;
     private Room _currentRoom;

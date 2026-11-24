@@ -61,6 +61,11 @@ public class Room : MonoBehaviour
         }
         return best;
     }
+    public Vector2 GetFarPosition(Vector2 playerPos)
+    {
+        Transform p = FindPoint(playerPos, false);
+        return p != null ? (Vector2)p.position : (Vector2)transform.position;
+    }
     public Vector2 GetAppearPosition(Vector2 playerPos)
     {
         Transform p = FindPoint(playerPos, true);

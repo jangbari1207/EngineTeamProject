@@ -12,7 +12,7 @@ public abstract class AbstractEnemy : MonoBehaviour
     public float chaseSpeed = 3.8f;
 
     public Animator AnimCompo { get; private set; }
-
+    public Vector3Int Facing { get { return _facing; } }   // 마지막으로 걸어간 방향
     private Vector3Int _facing = Vector3Int.down;
     private TilePathfinder _pathfinder;
     private Vector3 _moveTarget;
@@ -46,7 +46,24 @@ public abstract class AbstractEnemy : MonoBehaviour
         _moveTarget = wallMap.GetCellCenterWorld(nextCell);
         _moving = true;
     }
+    public bool HasArrived(Vector2 dest)
+    {
+        return !_moving && wallMap.WorldToCell(transform.position) == wallMap.WorldToCell(dest);
+    }
+    public bool CanSee(Vector2 target, float range)
+    {
+        Vector2 from = transform.position;
+        float dist = Vector2.Distance(from, target);
+        if (dist > range) return false;
 
+        int count = Mathf.CeilToInt(dist / (wallMap.cellSize.x * 0.25f));   // 0.25칸마다 벽이 있는지 확인
+        for (int i = 1; i < count; i++)
+        {
+            Vector2 p = Vector2.Lerp(from, target, (float)i / count);
+            if (wallMap.HasTile(wallMap.WorldToCell(p))) return false;
+        }
+        return true;
+    }
     public int GetPathCost(Vector2 from, Vector2 to)
     {
         return _pathfinder.GetPathCost(wallMap.WorldToCell(from), wallMap.WorldToCell(to));
