@@ -71,7 +71,11 @@ public class FrenzyEnemy : Enemy
         if (screamSound != null) screamSound.Play();
         if (footstepSound != null) footstepSound.Play();
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.red;
+    }
     // ChargeState가 매 프레임 호출
     public void ChargeTarget()
     {
