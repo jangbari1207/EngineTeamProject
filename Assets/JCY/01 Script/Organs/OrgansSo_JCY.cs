@@ -4,7 +4,7 @@ using UnityEngine;
 public class OrgansSo_JCY : ScriptableObject
 {
     public string organsName;
-    public IOrgansEffects_JCY organsEffect;
+    public OrgansEffects_JCY organsEffect;
     [TextArea(4 , 10)] public string description;
 
     public void SetItemName()

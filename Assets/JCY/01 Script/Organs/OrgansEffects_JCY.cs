@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(OraganRenderer_JCY))]
-public abstract class IOrgansEffects_JCY : MonoBehaviour
+public abstract class OrgansEffects_JCY : MonoBehaviour
 {
     public OraganRenderer_JCY RenderCompo { get; private set; }
     public abstract void Deformation(int amount);

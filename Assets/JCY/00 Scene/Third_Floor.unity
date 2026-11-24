@@ -207148,7 +207148,7 @@ PrefabInstance:
     - target: {fileID: 3745452063652201662, guid: e318d1147842ee343b2a0bd60941abd9, type: 3}
       propertyPath: _endDoor
       value: 
-      objectReference: {fileID: 1529932855}
+      objectReference: {fileID: 2055004883}
     - target: {fileID: 3745452063652201662, guid: e318d1147842ee343b2a0bd60941abd9, type: 3}
       propertyPath: _collider2D
       value: 
@@ -208545,6 +208545,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2938717453745283888, guid: e318d1147842ee343b2a0bd60941abd9, type: 3}
   m_PrefabInstance: {fileID: 2055004881}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055004883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3745452063652201662, guid: e318d1147842ee343b2a0bd60941abd9, type: 3}
+  m_PrefabInstance: {fileID: 2055004881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f059bf432d25344a82b3a875d01f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door_JCY
 --- !u!1001 &2061574024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255413,6 +255424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OragansManager_JCY
   _hart: {fileID: 0}
+  _eye: {fileID: 0}
+  _ear: {fileID: 0}
+  _leg: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

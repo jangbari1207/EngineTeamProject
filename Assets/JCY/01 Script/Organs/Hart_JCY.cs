@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Hart_JCY : IOrgansEffects_JCY
+public class Hart_JCY : OrgansEffects_JCY
 {
     public int currentDeformation; 
     [SerializeField , Min(1)] private int maxDeformation;
