@@ -6,11 +6,24 @@ public class PlayerTracker : MonoBehaviour
 {
     public Transform player;
     public Tilemap grid;                       // 벽 타일맵 (칸 계산용)
-
+    public Collider2D[] safeZones;
     public Vector2 PPosition { get { return player.position; } }
     public Vector3Int Facing { get; private set; } = Vector3Int.down;
     public int Steps { get; private set; }
     public bool IsHidden { get; set; }
+    public bool IsSafe
+    {
+        get
+        {
+            if (IsHidden) return true;
+
+            foreach (Collider2D zone in safeZones)
+            {
+                if (zone.OverlapPoint(PPosition)) return true;
+            }
+            return false;
+        }
+    }
     public event Action<Room, Vector2, Vector2> RoomChanged;
     private Vector3Int _lastCell;
     private Room _currentRoom;

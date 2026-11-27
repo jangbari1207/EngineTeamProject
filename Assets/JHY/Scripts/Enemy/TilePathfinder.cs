@@ -44,13 +44,7 @@ public class TilePathfinder
         if (node.g > 0)
             return new[] { f, Right(f), Left(f) };
 
-        if (Random.value < 0.07f)                       // 7%  : 뒤 → 왼쪽 → 오른쪽 → 앞
-            return new[] { Back(f), Left(f), Right(f), f };
-        if (Random.value < 0.70f)                       // 약 65% : 앞 → 오른쪽 → 왼쪽 → 뒤
-            return new[] { f, Right(f), Left(f), Back(f) };
-
-        Vector3Int p = playerFacing;                    // 나머지 : 플레이어가 보는 방향 기준
-        return new[] { p, Right(p), Left(p), Back(p) };
+        return new[] { f, Right(f), Left(f), Back(f) };
     }
 
     private Node Search(Vector3Int start, Vector3Int goal, Vector3Int facing, Vector3Int playerFacing, int maxSearch)

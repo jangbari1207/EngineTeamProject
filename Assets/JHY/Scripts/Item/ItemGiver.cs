@@ -1,21 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Item : MonoBehaviour
+public class ItemGiver : MonoBehaviour
 {
-    [SerializeField] private ItemSO itemData;
+    [SerializeField] private ItemSO itemData;      
     [SerializeField] private int quantity = 1;
+    [SerializeField] private Sprite openedSprite;  
     private bool isPlayerInRange = false;
-    public void Initialize(ItemSO data, int amount)
-    {
-        itemData = data;
-        quantity = amount;
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
             isPlayerInRange = true;
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -23,13 +21,14 @@ public class Item : MonoBehaviour
     }
     private void Update()
     {
-        if (Time.timeScale == 0) return;   
+        if (Time.timeScale == 0 || quantity <= 0) return;  
 
-        if (isPlayerInRange && Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
+        if (isPlayerInRange && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
             quantity = InventoryManager.instance.AddItem(itemData, quantity);
-            if (quantity <= 0)
-                Destroy(gameObject);
+
+            if (quantity <= 0 && openedSprite != null)
+                GetComponent<SpriteRenderer>().sprite = openedSprite;
         }
     }
 }

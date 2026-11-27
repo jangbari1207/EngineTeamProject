@@ -7,7 +7,8 @@ public enum EnemyType
     Patrol,       
     Charge,
     Search,
-    Attack
+    Attack,
+    Lose
 }
 public class EnemyStateMachine
 {
