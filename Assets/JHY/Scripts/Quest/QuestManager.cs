@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,11 +57,24 @@ public class QuestManager : MonoBehaviour
     }
     public void TryComplete(string questCode)
     {
-        if (questCode == null || questCode == "") return;
-        if (currentStep >= steps.Count) return;
+        if (string.IsNullOrWhiteSpace(questCode)) return;
+        if (steps == null || currentStep >= steps.Count) return;
 
+        // Compatibility path for existing QuestZone / LockedFloor components.
         if (steps[currentStep].questCode == questCode)
             CompleteStep();
+    }
+
+    public bool ReportSignal(QuestStepData stepData)
+    {
+        if (stepData == null) return false;
+        if (steps == null || currentStep >= steps.Count) return false;
+
+        // The SO reference assigned to the source must be the active step.
+        if (steps[currentStep] != stepData) return false;
+
+        CompleteStep();
+        return true;
     }
     public void CompleteStep()
     {

@@ -11,9 +11,19 @@ public class Hart_JCY : IOrgansEffects_JCY
         currentDeformation = 0;
     }
 
-    public override void Deformation(int amout)
+    public override void OragonDamage()
     {
-        currentDeformation += amout;
+        
+    }
+
+    public override void OragonHealth()
+    {
+        
+    }
+
+    public override void Deformation(int amount)
+    {
+        currentDeformation += 1;
         Debug.Log("심장 변형");
         Debug.Log("현재 심장 변형도:" + currentDeformation);
         RenderCompo.SetHash(currentDeformation);

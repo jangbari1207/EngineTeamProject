@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3624839054411769402}
   - component: {fileID: 3764348223807414693}
+  - component: {fileID: 1187483320}
   m_Layer: 0
   m_Name: Boundery_Garden
   m_TagString: Untagged
@@ -78,3 +79,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 25, y: 28}
   m_EdgeRadius: 0
+--- !u!114 &1187483320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446867035697922866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63efca821a334da58a51072a36bcb74c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::QuestGardenArrival_JCY
+  gardenQuest: {fileID: 11400000, guid: 3318f7cfc88c4b2e9c163f7da9a12267, type: 2}
