@@ -46,6 +46,32 @@ public abstract class AbstractEnemy : MonoBehaviour
         _moveTarget = wallMap.GetCellCenterWorld(nextCell);
         _moving = true;
     }
+    public bool MoveStraight(Vector3Int dir, float speed)
+    {
+        float step = speed * Time.deltaTime;
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (!_moving)
+            {
+                Vector3Int nextCell = wallMap.WorldToCell(transform.position) + dir;
+                if (wallMap.HasTile(nextCell)) return false;
+
+                _facing = dir;
+                _moveTarget = wallMap.GetCellCenterWorld(nextCell);
+                _moving = true;
+            }
+
+            float dist = Vector3.Distance(transform.position, _moveTarget);
+            transform.position = Vector3.MoveTowards(transform.position, _moveTarget, step);
+            if (transform.position != _moveTarget) return true;
+
+            _moving = false;
+            step -= dist;
+            if (step <= 0f) return true;
+        }
+        return true;
+    }
     public bool HasArrived(Vector2 dest)
     {
         return !_moving && wallMap.WorldToCell(transform.position) == wallMap.WorldToCell(dest);

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class RoomAppear : MonoBehaviour
 {
-    [Range(0, 100)] public float appearChance = 50f;   
 
     private FrenzyEnemy _enemy;
 
@@ -33,14 +32,21 @@ public class RoomAppear : MonoBehaviour
 
     private void Enter(Room room)
     {
-        if (room == null || room.isSafeRoom || room.noEncount || Random.Range(0f, 100f) >= appearChance)
+        if (room == null || room.isSafeRoom || room.noEncount || room.frenzyPoints.Length == 0)
         {
             _enemy.Hide();
             return;
         }
 
-        Vector2 pos = room.GetFarPosition(_enemy.tracker.PPosition);
+        if (Random.Range(0f, 100f) >= room.frenzyChance)
+        {
+            _enemy.Hide();
+            return;
+        }
+
+        Vector2 pos = room.GetFrenzyPosition(_enemy.tracker.PPosition);
         _enemy.Teleport(pos);
+        _enemy.SetPatrolPoints(room.frenzyPoints);
         _enemy.SetHome(pos);
         _enemy.stateMachine.ChangeState(EnemyType.Patrol);
     }

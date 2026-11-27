@@ -19,8 +19,15 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         health.text = "Health : " + currentHealth;
     }
+    private void OnEnable() { InvisibleEnemy.PlayerHit += TakeDamage; }
+    private void OnDisable() { InvisibleEnemy.PlayerHit -= TakeDamage; }
     private void Update()
     {
+        health.text = "Health : " + currentHealth;
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth = Mathf.Max(currentHealth - damage, 0);
         health.text = "Health : " + currentHealth;
     }
     public void RestoreHealth(int heal)

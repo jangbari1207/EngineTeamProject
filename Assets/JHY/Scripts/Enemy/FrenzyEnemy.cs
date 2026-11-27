@@ -8,7 +8,14 @@ public class FrenzyEnemy : Enemy
     public float patrolSpeed = 2f;
     [Header("발견")]
     public float sightRange = 8f;
+    public float loseRange = 7f;    
     [Header("돌진")]
+    private Vector3Int _burstDir;
+    public float burstSpeed = 8f;      // 발견 직후 확 튀어나가는 속도
+    public float burstTime = 0.4f;     // 그 속도를 유지하는 시간
+    public float minSpeed = 2.5f;      // 코너에서 느려져도 이 아래로는 안 내려감
+
+    private float _burstTimer;
     public float startSpeed = 3.5f;
     public float maxSpeed = 6f;             // 직선 최고 속도 (플레이어보다 빠르게)
     public float acceleration = 5f;         // 직선에서 초당 빨라지는 정도
@@ -43,12 +50,19 @@ public class FrenzyEnemy : Enemy
     {
         _home = pos;
     }
-
+    public void SetPatrolPoints(Transform[] points)
+    {
+        patrolPoints = points != null ? points : new Transform[0];
+        _patrolIndex = 0;
+    }
     public bool SeesPlayer()
     {
         return !tracker.IsHidden && CanSee(tracker.PPosition, sightRange);
     }
-
+    private bool KeepsSight()
+    {
+        return !tracker.IsHidden && CanSee(tracker.PPosition, loseRange);
+    }
     // PatrolState가 매 프레임 호출
     public void Patrol()
     {
@@ -64,8 +78,17 @@ public class FrenzyEnemy : Enemy
     // 발견한 순간 한 번
     public void StartCharge()
     {
+        Teleport(transform.position);   
+
+        Vector2 d = tracker.PPosition - (Vector2)transform.position;
+        if (Mathf.Abs(d.x) >= Mathf.Abs(d.y))
+            _burstDir = d.x >= 0 ? Vector3Int.right : Vector3Int.left;
+        else
+            _burstDir = d.y >= 0 ? Vector3Int.up : Vector3Int.down;
+
         _speed = startSpeed;
-        _lastFacing = Vector3Int.zero;
+        _burstTimer = burstTime;
+        _lastFacing = _burstDir;
         _lastSeenPos = tracker.PPosition;
 
         if (screamSound != null) screamSound.Play();
@@ -73,33 +96,41 @@ public class FrenzyEnemy : Enemy
     }
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;      // 발견 범위
         Gizmos.DrawWireSphere(transform.position, sightRange);
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;   // 놓치는 범위
+        Gizmos.DrawWireSphere(transform.position, loseRange);
     }
     // ChargeState가 매 프레임 호출
     public void ChargeTarget()
     {
-        // 보이는 동안만 위치를 갱신 → 시야가 끊기면 마지막으로 본 곳까지 달림
-        if (SeesPlayer()) _lastSeenPos = tracker.PPosition;
+        if (KeepsSight()) _lastSeenPos = tracker.PPosition;
+
+        // 처음 돌진: 정해진 방향으로만
+        if (_burstTimer > 0f)
+        {
+            _burstTimer -= Time.deltaTime;
+            if (!MoveStraight(_burstDir, burstSpeed)) _burstTimer = 0f;   // 벽이면 돌진 끝
+            if (footstepSound != null) footstepSound.pitch = 1.6f;
+            return;
+        }
 
         _speed = Mathf.MoveTowards(_speed, maxSpeed, acceleration * Time.deltaTime);
         MoveTo(_lastSeenPos, _speed, tracker.Facing);
 
-        // 방향이 바뀌면(코너) 속도가 줄어든다. 첫 방향은 제외
         if (Facing != _lastFacing)
         {
-            if (_lastFacing != Vector3Int.zero) _speed *= turnSlow;
+            _speed = Mathf.Max(minSpeed, _speed * turnSlow);
             _lastFacing = Facing;
         }
 
-        // 빠를수록 발소리도 빨라진다
         if (footstepSound != null) footstepSound.pitch = Mathf.Lerp(0.9f, 1.6f, _speed / maxSpeed);
     }
 
     // 시야가 끊긴 채 마지막으로 본 곳에 도착했는가
     public bool LostPlayer()
     {
-        return !SeesPlayer() && HasArrived(_lastSeenPos);
+        return _burstTimer <= 0f && !KeepsSight() && HasArrived(_lastSeenPos);
     }
 
     public void StopFootstep()

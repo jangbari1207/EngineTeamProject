@@ -8,17 +8,19 @@ public class Enemy : AbstractEnemy
 
     public bool IsChasing { get { return stateMachine.CurrentState is ChaseState; } }
     public bool WaitingAppear { get { return _waitingAppear; } }
-
+    public bool IsLosing { get { return stateMachine.CurrentState is LoseState; } }
+    public bool GaveUp { get; private set; }          
+    public Vector2 LostPos { get; private set; }
     private Vector2 _appearPos;
     private float _appearDelay;
     private bool _waitingAppear;
-
+    public float loseTime = 5f;
     protected override void Awake()
     {
         base.Awake();
         stateMachine.AddState(EnemyType.Inactive, new InactiveState(this, stateMachine, "Inactive"));
         stateMachine.AddState(EnemyType.Chase, new ChaseState(this, stateMachine, "Chase"));
-
+        stateMachine.AddState(EnemyType.Lose, new LoseState(this, stateMachine, "Lose"));
         stateMachine.Initialize(EnemyType.Inactive);
     }
 
@@ -40,9 +42,24 @@ public class Enemy : AbstractEnemy
     public void Hide()
     {
         _waitingAppear = false;
+        GaveUp = false;
         stateMachine.ChangeState(EnemyType.Inactive);
     }
-
+    public void LosePlayer(Vector2 pos)
+    {
+        LostPos = pos;
+        GaveUp = false;
+        stateMachine.ChangeState(EnemyType.Lose);
+    }
+    public void ResumeChase()
+    {
+        GaveUp = false;
+        stateMachine.ChangeState(EnemyType.Chase);
+    }
+    public void GiveUp()
+    {
+        GaveUp = true;
+    }
     // InactiveState가 매 프레임 호출. 나타날 시간이 되면 순간이동하고 true
     public bool TickAppear(float dt)
     {

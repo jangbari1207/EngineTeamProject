@@ -7,8 +7,10 @@ public class Room : MonoBehaviour
 
     [Header("방 설정")]
     public Transform[] appearPoints;
+    public Transform[] frenzyPoints;
     public bool isSafeRoom;
     [Header("조우 (방에 들어올 때 굴림)")]
+    [Range(0, 100)] public float frenzyChance = 50f;
     [Range(0, 100)] public float encountChance = 10f;   
     public float chaseTime = 0f;                        
     public float spawnDelay = 3f;                       
@@ -61,10 +63,20 @@ public class Room : MonoBehaviour
         }
         return best;
     }
-    public Vector2 GetFarPosition(Vector2 playerPos)
+    public Vector2 GetFrenzyPosition(Vector2 playerPos)
     {
-        Transform p = FindPoint(playerPos, false);
-        return p != null ? (Vector2)p.position : (Vector2)transform.position;
+        Vector2 best = transform.position;
+        float bestDist = -1f;
+        foreach (Transform p in frenzyPoints)
+        {
+            float d = Vector2.Distance(p.position, playerPos);
+            if (d > bestDist)
+            {
+                bestDist = d;
+                best = p.position;
+            }
+        }
+        return best;
     }
     public Vector2 GetAppearPosition(Vector2 playerPos)
     {

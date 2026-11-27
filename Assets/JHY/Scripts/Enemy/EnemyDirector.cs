@@ -34,6 +34,26 @@ public class EnemyDirector : MonoBehaviour
     {
         if (!IsChasing) return;
 
+        if (tracker.IsSafe)
+        {
+            if (enemy.WaitingAppear)           
+            {
+                EndChase();
+                return;
+            }
+            if (!enemy.IsLosing) enemy.LosePlayer(tracker.PPosition);
+        }
+        else if (enemy.IsLosing)
+        {
+            enemy.ResumeChase();
+        }
+
+        if (enemy.GaveUp)
+        {
+            EndChase();
+            return;
+        }
+
         timer.Tick();
 
         if (timer.IsOver && !enemy.IsChasing)
@@ -65,6 +85,7 @@ public class EnemyDirector : MonoBehaviour
         if (!IsChasing)
         {
             roller.AddVoltage();
+            if (tracker.IsSafe) return;
             if (roller.Roll(room, tracker.Steps)) StartChase(room);
             return;
         }
@@ -113,7 +134,6 @@ public class EnemyDirector : MonoBehaviour
     public void OnPlayerHide()
     {
         tracker.IsHidden = true;
-        if (IsChasing) EndChase();
     }
     public void OnPlayerUnhide()
     {
