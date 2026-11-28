@@ -11,6 +11,15 @@ public class Door_JCY : MonoBehaviour , IObject_JCY
     public Transform _doorTfm;
     public static float _time;
     public bool _isKey = false;
+    [SerializeField] private QuestStepData questStepOnUse;
+    [SerializeField] private TalkTextSO talkTextOnUse;
+    [SerializeField] private QuestStepData minimumQuestForTalk;
+    private bool hasPlayedUseDialogue;
+
+    public void SetLocked(bool locked)
+    {
+        _isKey = locked;
+    }
 
     public void Interaction(PlayerInterecttion_JCY player, FadePanel_JCY fadePanelJcy = null)
     {
@@ -37,6 +46,9 @@ public class Door_JCY : MonoBehaviour , IObject_JCY
 
         
         player.transform.position = _endDoor._doorTfm.position;
+        if (questStepOnUse != null && QuestManager.instance != null)
+            QuestManager.instance.ReportSignal(questStepOnUse);
+        TryShowUseDialogue();
         //문 열리는 사운드 출력
         //이동
        
@@ -50,5 +62,23 @@ public class Door_JCY : MonoBehaviour , IObject_JCY
         {
              _time = Time.time + 0.5f;
         }
+    }
+
+    private void TryShowUseDialogue()
+    {
+        if (hasPlayedUseDialogue || talkTextOnUse == null || minimumQuestForTalk == null ||
+            QuestManager.instance == null || QuestManager.instance.steps == null)
+            return;
+
+        int minimumQuestIndex = QuestManager.instance.steps.IndexOf(minimumQuestForTalk);
+        if (minimumQuestIndex < 0 || QuestManager.instance.currentStep < minimumQuestIndex)
+            return;
+
+        TalkManager talkManager = TalkManager.Instance;
+        if (talkManager == null)
+            return;
+
+        hasPlayedUseDialogue = true;
+        talkManager.ShowTalk(talkTextOnUse);
     }
 }

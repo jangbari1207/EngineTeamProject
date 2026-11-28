@@ -6,6 +6,8 @@ public class PlayerInterecttion_JCY : MonoBehaviour
 {
     [SerializeField] private FadePanel_JCY _fade;
     [SerializeField] private float _diectRange = 1f;
+    [SerializeField] private Key interactKey = Key.E;
+    [SerializeField] private Key descriptionKey = Key.F;
     public LayerMask _whatIsObj;
 
     private void OnDrawGizmos()
@@ -22,13 +24,14 @@ public class PlayerInterecttion_JCY : MonoBehaviour
             return;
         }
         
-        if (col.TryGetComponent(out IObject_JCY obj) && col != null)
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current[interactKey].wasPressedThisFrame && col.TryGetComponent(out IObject_JCY obj))
         {
-            if(Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                col = null;
-                obj.Interaction(this , _fade);
-            }
+            obj.Interaction(this, _fade);
         }
+
+        if (Keyboard.current[descriptionKey].wasPressedThisFrame && col.TryGetComponent(out IObjectDescription_JCY description))
+            description.ShowDescription();
     }
 }

@@ -11,4 +11,7 @@ public abstract class IOrgansEffects_JCY : MonoBehaviour
     {
         RenderCompo = GetComponentInChildren<OraganRenderer_JCY>();
     }
+
+    public abstract void OragonDamage();
+    public abstract void OragonHealth();
 }
