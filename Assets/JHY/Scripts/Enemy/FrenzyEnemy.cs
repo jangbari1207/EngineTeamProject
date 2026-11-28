@@ -57,11 +57,11 @@ public class FrenzyEnemy : Enemy
     }
     public bool SeesPlayer()
     {
-        return !tracker.IsHidden && CanSee(tracker.PPosition, sightRange);
+        return !tracker.IsSafe && CanSee(tracker.PPosition, sightRange);
     }
     private bool KeepsSight()
     {
-        return !tracker.IsHidden && CanSee(tracker.PPosition, loseRange);
+        return !tracker.IsSafe && CanSee(tracker.PPosition, loseRange);
     }
     // PatrolState가 매 프레임 호출
     public void Patrol()
@@ -140,7 +140,7 @@ public class FrenzyEnemy : Enemy
 
     public void CheckCatch()
     {
-        if (_caught || tracker.IsHidden) return;
+        if (_caught || tracker.IsSafe) return;
 
         if (Vector2.Distance(transform.position, tracker.PPosition) < catchDistance)
         {
